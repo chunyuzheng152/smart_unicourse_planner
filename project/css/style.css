@@ -1,0 +1,54 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.custom-navbar {
+  background-color: #003087;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.intro-section {
+  background-color: #f8f9fa;
+}
+
+.section-title {
+  color: #003087;
+  font-weight: bold;
+}
+
+.custom-btn {
+  background-color: #003087;
+  color: white;
+  border: none;
+}
+
+.custom-btn:hover {
+  background-color: #00256a;
+  color: white;
+}
+
+.chart-box {
+  height: 220px;
+  border: 2px dashed #003087;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  font-weight: bold;
+  color: #003087;
+}
+
+.table-header th {
+  background-color: #003087 !important;
+  color: white !important;
+}
+
+/*hover dropdown*/
+@media (min-width: 992px) {
+  .hover-dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+  }
+}
