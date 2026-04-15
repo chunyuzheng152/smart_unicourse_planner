@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+  }
+
+  .form-container {
+    width: 350px;
+    margin: 100px auto;
+    padding: 25px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+
+  .form-container h1 {
+    text-align: center;
+    color: #003087;
+  }
+
+  .form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+</style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h1>Login</h1>
+        <form>
+            <label for="usn">Username</label><br>
+            <input type="text" id="usn" required placeholder="Enter your username"><br>
+
+            <label for="psw">Password</label><br>
+            <input type="password" id="psw" required placeholder="Enter your password"><br>
+            
+            <button type="submit" class=""custom-btn>Login</button>
+        </form>
+        <p>Don't have an account?<a href="signup.html"> Sign up</a></p>
+    </div>
+</body>
+</html>

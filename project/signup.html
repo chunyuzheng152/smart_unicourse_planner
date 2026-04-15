@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .form-container {
+        width: 350px;
+        margin: 100px auto;
+        padding: 25px;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+    }
+
+    .form-container h1 {
+        text-align: center;
+        color: #003087;
+    }
+
+    .form-container input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+    }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form>
+            <h1>Sign Up</h1>
+            <p>Please fiil in this form to create an account</p>
+            <label for="email"><b>Email</b></label><br>
+            <input type="text" placeholder="Enter Email" id="email" required><br>
+
+            <label for="psw"><b>Password</b></label><br>
+            <input type="password" placeholder="Enter Password" id="psw" required><br>
+
+            <label for="psw-repeat"><b>Repeat Password</b></label><br>
+            <input type="password" placeholder="Repeat Password" id="psw-repeat" required><br>
+
+            <label>
+                <input type="checkbox"  name="remember">Remember me
+            </label>
+        </form>
+        <button type="button" class="custom-btn">Sign Up</button>
+    </div>
+    </body>
+</html>
