@@ -52,3 +52,33 @@ body {
     margin-top: 0;
   }
 }
+
+.major-header-title {
+  color: #003087;
+  font-weight: bold;
+  text-align: center;
+}
+
+.major-brief-description {
+  color: #333;
+  font-size: 1.2em;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.nav-tabs .nav-link {
+  color: #555; 
+  border: 1px solid transparent; 
+  border-radius: 0; 
+}
+
+.nav-tabs .nav-link:hover {
+  border-color: #ddd #ddd #fff; 
+  background-color: #f8f9fa;
+}
+
+.nav-tabs .nav-link.active {
+  color: #fff !important;         
+  background-color: #003087 !important; 
+  border-color: #003087;      
+}
