@@ -10,13 +10,13 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Navbar -->
+<!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top">
     <div class="container">
-        <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
-         <img src="images/logo.png" alt="Logo" width="150" height="60" class="me-3">
-         <span>smart unicourse</span>
-        </a>
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+        <img src="images/logo.png" alt="Logo" width="150" height="60" class="me-3">
+        <span>smart unicourse</span>
+      </a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
         <span class="navbar-toggler-icon"></span>
@@ -26,7 +26,7 @@
         <ul class="navbar-nav ms-auto">
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link active" href="index.html">Home</a>
           </li>
 
           <li class="nav-item dropdown hover-dropdown">
@@ -34,27 +34,26 @@
               Majors
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Computer Science</a></li>
-              <li><a class="dropdown-item" href="#">Data Science</a></li>
-              <li><a class="dropdown-item" href="#">Software Engineering</a></li>
+              <li><a class="dropdown-item" href="computer_science.html">Computer Science</a></li>
+              <li><a class="dropdown-item" href="data_science.html">Data Science</a></li>
+              <li><a class="dropdown-item" href="software_engineering.html">Software Engineering</a></li>
             </ul>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Survey</a>
+            <a class="nav-link" href="survey.html">Survey</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link" href="login.html">Login</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Sign Up</a>
+              <a class="nav-link avatar-link" href="settings.html">
+                <span id="navAvatar" class="nav-avatar">U</span>
+              </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="#">Settings</a>
-          </li>
         </ul>
       </div>
     </div>
@@ -63,10 +62,9 @@
   <section class="py-5 intro-section">
     <div class="container">
       <h1 class="mb-3">Welcome to smart unicourse</h1>
-      <p class="lead">
-        This website helps students explore computer-related majors. 
-        Users can view major information, learn about course content, 
-        and see which majors are the most popular.
+      <p class="lead mb-2 fs-4">Find the right computer major for you.</p>
+      <p class="text-muted fs-5">
+         View major details, explore courses, and see what's popular.
       </p>
     </div>
   </section>
@@ -77,14 +75,47 @@
 
       <div class="row g-4">
         <div class="col-md-6">
-          <div class="chart-box">
-            Chart Placeholder 1
-          </div>
+            <div class="chart-box" id="popularMajorChart">
+              <!--
+                TODO
+                Replace this placeholder with a chart showing survey result statistics.
+                API
+                GET /api/survey/results
+                Expected data example:
+                {
+                  "popular_major": {
+                    "Computer Science": 35,
+                    "Data Science": 30,
+                    "Software Engineering": 25,
+                    "Other": 10
+                  }
+                }
+                This chart should show the percentage of users choosing each major.
+              -->
+              Popular Major Chart
+            </div>
         </div>
 
         <div class="col-md-6">
-          <div class="chart-box">
-            Chart Placeholder 2
+          <div class="chart-box" id="majorReasonChart">
+            <!--
+              TODO
+              Replace this placeholder with a chart showing why students choose their majors.
+              API
+              GET /api/survey/results
+
+              Expected data example:
+              {
+                "major_reason": {
+                  "Good job opportunities": 40,
+                  "High salary potential": 25,
+                  "Personal interest": 25,
+                  "Useful skills": 10
+                }
+              }
+              This chart should show the main reasons students choose a major.
+            -->
+            Major Choice Reason Chart
           </div>
         </div>
       </div>
@@ -103,7 +134,7 @@
               <p class="card-text">
                 Focuses on programming, algorithms, and systems.
               </p>
-              <a href="#" class="btn custom-btn">View</a>
+              <a href="computer_science.html" class="btn custom-btn">View</a>
             </div>
           </div>
         </div>
@@ -115,7 +146,7 @@
               <p class="card-text">
                 Focuses on data analysis, statistics, and machine learning.
               </p>
-              <a href="#" class="btn custom-btn">View</a>
+              <a href="data_science.html" class="btn custom-btn">View</a>
             </div>
           </div>
         </div>
@@ -127,7 +158,7 @@
               <p class="card-text">
                 Focuses on software design, development, and testing.
               </p>
-              <a href="#" class="btn custom-btn">View</a>
+              <a href="software_engineering.html" class="btn custom-btn">View</a>
             </div>
           </div>
         </div>
@@ -150,17 +181,17 @@
           </thead>
           <tbody>
             <tr>
-              <td>Computer Science</td>
+              <td><a href="computer_science.html">Computer Science</a></td>
               <td>Programming and systems</td>
               <td>Software Developer</td>
             </tr>
             <tr>
-              <td>Data Science</td>
+              <td><a href="data_science.html">Data Science</a></td>
               <td>Data analysis and machine learning</td>
               <td>Data Analyst</td>
             </tr>
             <tr>
-              <td>Software Engineering</td>
+              <td><a href="software_engineering.html">Software Engineering</a></td>
               <td>Software design and testing</td>
               <td>Software Engineer</td>
             </tr>
@@ -171,5 +202,6 @@
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

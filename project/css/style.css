@@ -82,3 +82,333 @@ body {
   background-color: #003087 !important; 
   border-color: #003087;      
 }
+/*major detail*/
+.major-content-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.info-card {
+    background: #f8f9fa;
+    border: 1px solid #e6e6e6;
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.info-card h5 {
+    color: #003087;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.info-card p,
+.info-card li {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.skill-tags .badge {
+    margin-right: 8px;
+    margin-bottom: 8px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+}
+
+.tab-content h3 {
+    color: #003087;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+/*login_signup*/
+.form-container {
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.form-container h1 {
+  text-align: center;
+  color: #003087;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.form-container .form-label {
+  font-weight: 600;
+  color: #333;
+}
+
+.form-container a {
+  color: #003087;
+  text-decoration: none;
+}
+
+.form-container a:hover {
+  text-decoration: underline;
+}
+
+/* User avatar in navbar */
+.avatar-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-left: 12px;
+}
+
+.nav-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: white;
+  color: #003087;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1;
+  overflow: hidden;
+}
+
+/* Settings page layout */
+.settings-layout {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.settings-sidebar {
+  width: 240px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 16px;
+  position: sticky;
+  top: 100px;
+}
+
+.settings-sidebar-title {
+  color: #003087;
+  font-weight: bold;
+  margin-bottom: 14px;
+  padding-left: 10px;
+}
+
+.settings-sidebar-btn {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  padding: 12px 14px;
+  margin-bottom: 6px;
+  border-radius: 10px;
+  text-align: left;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.settings-sidebar-btn:hover {
+  background-color: #f0f5ff;
+  color: #003087;
+}
+
+.settings-sidebar-btn.active {
+  background-color: #003087;
+  color: white;
+}
+
+.settings-main {
+  flex: 1;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 32px;
+  min-height: 520px;
+}
+
+.settings-panel {
+  display: none;
+}
+
+.settings-panel.active {
+  display: block;
+}
+
+.settings-panel h2 {
+  color: #003087;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.profile-avatar-preview {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #003087;
+  color: white;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+  font-size: 28px;
+  overflow: hidden;
+}
+
+.comment-item {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 12px;
+  background-color: #f8f9fa;
+}
+
+.comment-item h6 {
+  color: #003087;
+  font-weight: bold;
+}
+
+/* Responsive settings layout */
+@media (max-width: 768px) {
+  .settings-layout {
+    flex-direction: column;
+  }
+
+  .settings-sidebar {
+    width: 100%;
+    position: static;
+  }
+
+  .settings-main {
+    width: 100%;
+  }
+}
+
+/* Discussion board */
+.discussion-section {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.discussion-section h3 {
+  color: #003087;
+  font-weight: bold;
+}
+
+.comment-list {
+  margin-top: 20px;
+}
+
+.comment-item {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 12px;
+  background-color: #f8f9fa;
+}
+
+.comment-item h6 {
+  color: #003087;
+  font-weight: bold;
+}
+
+/* Survey page */
+.survey-wrapper {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.survey-card {
+  display: none;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 34px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.survey-card.active {
+  display: block;
+}
+
+.survey-card h2 {
+  color: #003087;
+  font-weight: bold;
+  margin-bottom: 18px;
+}
+
+.survey-progress {
+  color: #6c757d;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.survey-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.survey-options label {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 13px 15px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+}
+
+.survey-options label:hover {
+  border-color: #003087;
+  background-color: #f0f5ff;
+}
+
+.survey-options input {
+  margin-right: 10px;
+}
+
+.survey-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 28px;
+}
+
+.result-block {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+  background-color: #f8f9fa;
+}
+
+.result-block h5 {
+  color: #003087;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+.result-row {
+  margin-bottom: 14px;
+}
+
+.progress {
+  height: 10px;
+  margin-top: 6px;
+}
+
+.progress-bar {
+  background-color: #003087;
+}
