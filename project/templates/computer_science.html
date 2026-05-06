@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Science</title>
+    <title>Computer Science</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
-                <img src="images/logo.png" alt="Logo" width="150" height="60" class="me-3">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ url_for('index')}}">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" width="150" height="60" class="me-3">
                 <span>smart unicourse</span>
             </a>
 
@@ -24,38 +24,34 @@
                 <ul class="navbar-nav ms-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="{{ url_for('index')}}">Home</a>
                     </li>
 
                     <li class="nav-item dropdown hover-dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             Majors
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="computer_science.html">Computer Science</a></li>
-                            <li><a class="dropdown-item" href="data_science.html">Data Science</a></li>
-                            <li><a class="dropdown-item" href="software_engineering.html">Software Engineering</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('computer_science')}}">Computer Science</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('data_science')}}">Data Science</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('software_engineering')}}">Software Engineering</a></li>
                         </ul>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="survey.html">Survey</a>
+                        <a class="nav-link" href="{{ url_for('survey')}}">Survey</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Login</a>
+                        <a class="nav-link" href="{{ url_for('login')}}">Login</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="signup.html">Sign Up</a>
-                    </li>
 
                     <li class="nav-item">
-                        <a class="nav-link avatar-link" href="settings.html">
+                        <a class="nav-link avatar-link" href="{{ url_for('settings')}}">
                            <span id="navAvatar" class="nav-avatar">U</span>
                         </a>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -63,15 +59,14 @@
 
     <!-- Brief Description of Major -->
     <section class="py-5 intro-section">
-        <div class="major-header">
-            <h1 class="major-header-title">Data Science</h1>
-            <div class="major-brief-description">
-                Data Science focuses on collecting, analysing, and interpreting data. <br>
-                It uses statistics, programming, and machine learning to support decision-making.
-            </div>
+    <div class="major-header">
+        <div class="major-header-title"></div>
+            <h1 class="major-header-title">Computer Science</h1>
+        <div class="major-brief-description">
+            Computer Science is the study of designing and developing computer systems. <br> It encompasses programming, data structures, algorithms, and computer networks to create effective IT solutions. 
         </div>
+    </div>
     </section>
-
     <!-- Info Navbar -->
     <section class="py-5">
         <div class="container">
@@ -100,15 +95,14 @@
                     </button>
                 </li>
             </ul>
-
             <div class="tab-content mt-4" id="majorInfoTabsContent">
                 <div class="tab-pane fade show active" id="courses" role="tabpanel">
                     <div class="major-content-card">
                         <h3>Courses</h3>
                         <p>
-                            Data Science focuses on collecting, processing, analysing, and presenting data.
-                            Students learn how to use programming, statistics, databases, and machine learning
-                            to solve real-world problems.
+                            Computer Science courses usually cover programming, algorithms, data management,
+                            computer systems, networks, and software development. Students learn how to design,
+                            build, test, and improve computer-based systems.
                         </p>
 
                         <div class="table-responsive mt-4">
@@ -122,54 +116,52 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Programming for Data Science</td>
-                                        <td>Python, R, data processing, and basic coding for data tasks.</td>
-                                        <td>Programming helps students clean, analyse, and automate data work.</td>
+                                        <td>Programming</td>
+                                        <td>Basic coding, problem solving, variables, functions, and program structure.</td>
+                                        <td>This is the foundation for most computer science work.</td>
                                     </tr>
                                     <tr>
-                                        <td>Statistics</td>
-                                        <td>Probability, statistical methods, hypothesis testing, and data interpretation.</td>
-                                        <td>Statistics helps students understand patterns and uncertainty in data.</td>
+                                        <td>Data Structures and Algorithms</td>
+                                        <td>Lists, trees, graphs, searching, sorting, and algorithm efficiency.</td>
+                                        <td>This helps students write faster and more organised programs.</td>
                                     </tr>
                                     <tr>
                                         <td>Databases</td>
-                                        <td>SQL, database design, data storage, and data management.</td>
-                                        <td>Data scientists need to collect and manage data from different sources.</td>
+                                        <td>Database design, SQL, data storage, and data management.</td>
+                                        <td>Most websites and apps need databases to store user and system data.</td>
                                     </tr>
                                     <tr>
-                                        <td>Machine Learning</td>
-                                        <td>Prediction models, classification, clustering, and model evaluation.</td>
-                                        <td>Machine learning helps students build systems that learn from data.</td>
+                                        <td>Computer Networks</td>
+                                        <td>Internet structure, communication protocols, routing, and data transfer.</td>
+                                        <td>This helps students understand how computers communicate with each other.</td>
                                     </tr>
                                     <tr>
-                                        <td>Data Visualisation</td>
-                                        <td>Charts, dashboards, reports, and visual storytelling.</td>
-                                        <td>Visualisation helps users understand data more clearly.</td>
+                                        <td>Software Development</td>
+                                        <td>Project design, testing, debugging, teamwork, and version control.</td>
+                                        <td>This prepares students for real software projects.</td>
                                     </tr>
                                     <tr>
-                                        <td>Applied Data Projects</td>
-                                        <td>Using data to solve business, science, health, or technology problems.</td>
-                                        <td>Project work helps students connect technical skills with real decisions.</td>
+                                        <td>Advanced Topics</td>
+                                        <td>Artificial intelligence, cybersecurity, web development, and data-related topics.</td>
+                                        <td>These areas help students choose a future career direction.</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-
                         <div class="alert alert-info mt-4">
                             For official course information, please check the
-                            <a href="https://www.uwa.edu.au/study/courses/data-science" target="_blank">
-                                UWA Data Science course page
+                            <a href="https://www.uwa.edu.au/study/courses/computer-science" target="_blank">
+                                UWA Computer Science course page
                             </a>.
                         </div>
                     </div>
                 </div>
-
                 <div class="tab-pane fade" id="skills" role="tabpanel">
                     <div class="major-content-card">
                         <h3>Skills</h3>
                         <p>
-                            Data Science students develop technical skills for working with data,
-                            as well as communication skills for explaining data-based findings.
+                            Computer Science students develop both technical skills and general problem-solving skills.
+                            These skills are useful in software development, data analysis, cybersecurity, and many other technology areas.
                         </p>
 
                         <div class="row mt-4 g-4">
@@ -177,12 +169,12 @@
                                 <div class="info-card h-100">
                                     <h5>Technical Skills</h5>
                                     <ul>
-                                        <li>Programming with Python, R, or similar tools.</li>
-                                        <li>Cleaning and preparing raw data.</li>
-                                        <li>Using statistics to analyse data.</li>
-                                        <li>Writing SQL queries and working with databases.</li>
-                                        <li>Building and testing machine learning models.</li>
-                                        <li>Creating charts, dashboards, and reports.</li>
+                                        <li>Programming with languages such as Python, Java, C, or JavaScript.</li>
+                                        <li>Understanding algorithms and data structures.</li>
+                                        <li>Designing and using databases.</li>
+                                        <li>Building websites and software applications.</li>
+                                        <li>Understanding computer systems and networks.</li>
+                                        <li>Testing and debugging code.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -192,22 +184,22 @@
                                     <h5>Transferable Skills</h5>
                                     <ul>
                                         <li>Logical thinking and problem solving.</li>
-                                        <li>Explaining data results in simple language.</li>
-                                        <li>Making decisions based on evidence.</li>
-                                        <li>Working with business or research questions.</li>
-                                        <li>Teamwork in data projects.</li>
-                                        <li>Learning new data tools and technologies.</li>
+                                        <li>Teamwork in software projects.</li>
+                                        <li>Clear communication of technical ideas.</li>
+                                        <li>Project planning and time management.</li>
+                                        <li>Learning new tools and technologies.</li>
+                                        <li>Breaking large problems into smaller tasks.</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="skill-tags mt-4">
-                            <span class="badge bg-primary">Python</span>
-                            <span class="badge bg-primary">Statistics</span>
-                            <span class="badge bg-primary">SQL</span>
-                            <span class="badge bg-primary">Machine Learning</span>
-                            <span class="badge bg-primary">Data Visualisation</span>
+                            <span class="badge bg-primary">Programming</span>
+                            <span class="badge bg-primary">Algorithms</span>
+                            <span class="badge bg-primary">Databases</span>
+                            <span class="badge bg-primary">Web Development</span>
+                            <span class="badge bg-primary">Networks</span>
                             <span class="badge bg-primary">Problem Solving</span>
                         </div>
                     </div>
@@ -217,62 +209,61 @@
                     <div class="major-content-card">
                         <h3>Careers</h3>
                         <p>
-                            Data Science graduates can work in technology companies, banks,
-                            consulting firms, government departments, healthcare organisations,
-                            research teams, and many other data-driven workplaces.
+                            Computer Science graduates can work in software companies, technology teams,
+                            government departments, banks, consulting firms, and research-related organisations.
                         </p>
 
                         <div class="row mt-4 g-4">
                             <div class="col-md-4">
                                 <div class="info-card h-100">
+                                    <h5>Software Developer</h5>
+                                    <p>
+                                        Software developers design, build, and maintain applications, systems, and digital tools.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="info-card h-100">
+                                    <h5>Web Developer</h5>
+                                    <p>
+                                        Web developers create websites and web applications using front-end and back-end technologies.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="info-card h-100">
                                     <h5>Data Analyst</h5>
                                     <p>
-                                        Data analysts clean, analyse, and present data to support business or organisational decisions.
+                                        Data analysts use data to find patterns, support decisions, and create reports or visualisations.
                                     </p>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="info-card h-100">
-                                    <h5>Data Scientist</h5>
+                                    <h5>Cybersecurity Analyst</h5>
                                     <p>
-                                        Data scientists use statistics, programming, and machine learning to find insights from complex data.
+                                        Cybersecurity analysts help protect computer systems, networks, and data from security risks.
                                     </p>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="info-card h-100">
-                                    <h5>Business Analyst</h5>
+                                    <h5>Systems Analyst</h5>
                                     <p>
-                                        Business analysts connect data findings with business needs and help organisations improve decisions.
+                                        Systems analysts study business needs and help design suitable technology solutions.
                                     </p>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="info-card h-100">
-                                    <h5>Machine Learning Assistant</h5>
+                                    <h5>AI Assistant / ML Assistant</h5>
                                     <p>
-                                        Machine learning assistants support model building, testing, and data preparation.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="info-card h-100">
-                                    <h5>Database Analyst</h5>
-                                    <p>
-                                        Database analysts help manage, organise, and check data stored in databases.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="info-card h-100">
-                                    <h5>Research Analyst</h5>
-                                    <p>
-                                        Research analysts use data to support academic, government, or industry research projects.
+                                        Graduates may support artificial intelligence or machine learning projects through coding and data work.
                                     </p>
                                 </div>
                             </div>
@@ -284,9 +275,9 @@
                     <div class="major-content-card">
                         <h3>Fees</h3>
                         <p>
-                            Tuition fees for Data Science may vary depending on the university,
+                            Tuition fees for Computer Science may vary depending on the university,
                             student status, study load, and selected units. Domestic and international students
-                            may have different fee structures.
+                            may also have different fee structures.
                         </p>
 
                         <div class="row mt-4 g-4">
@@ -294,9 +285,8 @@
                                 <div class="info-card h-100">
                                     <h5>Domestic Students</h5>
                                     <p>
-                                        Domestic students may pay fees based on their course structure,
-                                        Commonwealth-supported place status, and selected units.
-                                        The final cost can change depending on annual study load.
+                                        Domestic students may pay fees based on their course structure and government-supported place status.
+                                        The final cost can change depending on the number of units taken each year.
                                     </p>
                                 </div>
                             </div>
@@ -305,8 +295,8 @@
                                 <div class="info-card h-100">
                                     <h5>International Students</h5>
                                     <p>
-                                        International students usually pay annual tuition fees.
-                                        The amount can vary by course, year of study, and enrolment load.
+                                        International students usually pay annual tuition fees. The amount can vary by university,
+                                        year of study, and enrolment load.
                                     </p>
                                 </div>
                             </div>
@@ -321,14 +311,13 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="tab-pane fade" id="scholarships" role="tabpanel">
                     <div class="major-content-card">
                         <h3>Scholarships</h3>
                         <p>
-                            Data Science students may be able to apply for different types of scholarships.
-                            These scholarships can support students based on academic achievement,
-                            financial need, background, leadership, or study area.
+                            Computer Science students may be able to apply for different types of scholarships.
+                            These scholarships can support students based on academic results, financial need,
+                            background, leadership, or study area.
                         </p>
 
                         <div class="table-responsive mt-4">
@@ -373,12 +362,11 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="tab-pane fade" id="admission" role="tabpanel">
                     <div class="major-content-card">
                         <h3>Admission Requirements</h3>
                         <p>
-                            Admission requirements for Data Science depend on the university and the applicant's background.
+                            Admission requirements for Computer Science depend on the university and the student's background.
                             Students usually need to meet academic entry requirements and English language requirements.
                         </p>
 
@@ -389,8 +377,7 @@
                                     <ul>
                                         <li>Completion of high school or equivalent qualification.</li>
                                         <li>Meeting the required ATAR or equivalent entry score.</li>
-                                        <li>Mathematics background may be recommended or required.</li>
-                                        <li>Some pathway students may enter through diploma or foundation programs.</li>
+                                        <li>Relevant mathematics background may be recommended or required.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -401,7 +388,7 @@
                                     <ul>
                                         <li>International students usually need to meet English language requirements.</li>
                                         <li>Accepted tests may include IELTS, TOEFL, or equivalent tests.</li>
-                                        <li>The exact score depends on the university and course level.</li>
+                                        <li>The exact score depends on the university.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -414,7 +401,6 @@
                                 diploma pathways, or internal transfer options, depending on the university.
                             </p>
                         </div>
-
                         <div class="alert alert-info mt-4">
                             Entry requirements may depend on the course and applicant background.
                             Please check the
@@ -426,112 +412,114 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="discussion" role="tabpanel">
-                  <div class="discussion-section">
-                      <h3>Discussion Board</h3>
-                      <p class="text-muted">Share your thoughts or questions about Data Science.</p>
+                    <div class="discussion-section">
+                        <h3>Discussion Board</h3>
+                        <p class="text-muted">Share your thoughts or questions about Computer Science.</p>
 
-                      <!--
+                        <!--
+                        Temporary discussion board.
                         TODO
                         Replace localStorage with database records.
-                        Suggested backend APIs:
-                        GET /api/majors/data-science/comments
-                        POST /api/majors/data-science/comments
+                        Suggested APIs:
+                        GET /api/majors/computer-science/comments
+                        POST /api/majors/computer-science/comments
                         GET /api/my-comments
-                      -->
+                        -->
 
-                      <form id="commentForm" class="mb-4">
-                          <div class="mb-3">
-                              <label for="commentInput" class="form-label">Add a comment</label>
-                              <textarea id="commentInput" class="form-control" rows="3" placeholder="Write your comment here..."></textarea>
-                          </div>
+                        <form id="commentForm" class="mb-4">
+                            <div class="mb-3">
+                                <label for="commentInput" class="form-label">Add a comment</label>
+                                <textarea id="commentInput" class="form-control" rows="3" placeholder="Write your comment here..."></textarea>
+                            </div>
 
-                          <button type="submit" class="btn custom-btn">Post Comment</button>
-                      </form>
+                            <button type="submit" class="btn custom-btn">Post Comment</button>
+                        </form>
 
-                      <div id="commentList" class="comment-list">
-                          <!-- Comments will be inserted by JavaScript -->
-                      </div>
-                  </div>
-              </div>
+                        <div id="commentList" class="comment-list">
+                            <!-- Comments will be inserted by JavaScript -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-
+    <!-- Javascript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
     <script>
-    // Temporary front-end discussion board for Data Science.
+    // Temporary front-end discussion board.
     // TODO for backend:
     // Replace localStorage with real database comments.
     // Each comment should include: id, user_id, username, major_id, content, created_at.
-      const majorName = "Data Science";
-      const majorPageUrl = "data_science.html";
-      const commentStorageKey = "comments_data_science";
 
-      const commentForm = document.getElementById("commentForm");
-      const commentInput = document.getElementById("commentInput");
-      const commentList = document.getElementById("commentList");
+    const majorName = "Computer Science";
+    const majorPageUrl = "{{ url_for('computer_science')}}";
+    const commentStorageKey = "comments_computer_science";
 
-      function loadComments() {
-          const comments = JSON.parse(localStorage.getItem(commentStorageKey)) || [];
+    const commentForm = document.getElementById("commentForm");
+    const commentInput = document.getElementById("commentInput");
+    const commentList = document.getElementById("commentList");
 
-          commentList.innerHTML = "";
+    function loadComments() {
+        const comments = JSON.parse(localStorage.getItem(commentStorageKey)) || [];
 
-          if (comments.length === 0) {
-              commentList.innerHTML = `<p class="text-muted">No comments yet. Be the first to comment.</p>`;
-              return;
-          }
+        commentList.innerHTML = "";
 
-          comments.forEach(function(comment) {
-              const commentItem = document.createElement("div");
-              commentItem.className = "comment-item";
+        if (comments.length === 0) {
+            commentList.innerHTML = `<p class="text-muted">No comments yet. Be the first to comment.</p>`;
+            return;
+        }
 
-              commentItem.innerHTML = `
-                  <div class="d-flex justify-content-between align-items-start">
-                      <div>
-                          <h6 class="mb-1">${comment.username}</h6>
-                          <p class="mb-1">${comment.content}</p>
-                          <small class="text-muted">${comment.date}</small>
-                      </div>
-                  </div>
-              `;
+        comments.forEach(function(comment) {
+            const commentItem = document.createElement("div");
+            commentItem.className = "comment-item";
 
-              commentList.appendChild(commentItem);
-          });
-      }
+            commentItem.innerHTML = `
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h6 class="mb-1">${comment.username}</h6>
+                        <p class="mb-1">${comment.content}</p>
+                        <small class="text-muted">${comment.date}</small>
+                    </div>
+                </div>
+            `;
 
-      commentForm.addEventListener("submit", function(event) {
-          event.preventDefault();
+            commentList.appendChild(commentItem);
+        });
+    }
 
-          const content = commentInput.value.trim();
+    commentForm.addEventListener("submit", function(event) {
+        event.preventDefault();
 
-          if (!content) {
-              alert("Please write a comment.");
-              return;
-          }
+        const content = commentInput.value.trim();
 
-          const username = localStorage.getItem("username") || "User";
+        if (!content) {
+            alert("Please write a comment.");
+            return;
+        }
 
-          const newComment = {
-              majorName: majorName,
-              pageUrl: majorPageUrl,
-              username: username,
-              content: content,
-              date: new Date().toLocaleDateString()
-          };
+        const username = localStorage.getItem("username") || "User";
 
-          const comments = JSON.parse(localStorage.getItem(commentStorageKey)) || [];
-          comments.unshift(newComment);
+        const newComment = {
+            majorName: majorName,
+            pageUrl: majorPageUrl,
+            username: username,
+            content: content,
+            date: new Date().toLocaleDateString()
+        };
 
-          localStorage.setItem(commentStorageKey, JSON.stringify(comments));
+        const comments = JSON.parse(localStorage.getItem(commentStorageKey)) || [];
+        comments.unshift(newComment);
 
-          commentInput.value = "";
-          loadComments();
+        localStorage.setItem(commentStorageKey, JSON.stringify(comments));
 
-          alert("Comment posted.");
-      });
+        commentInput.value = "";
+        loadComments();
 
-      loadComments();
-  </script>
+        alert("Comment posted.");
+    });
+
+    loadComments();
+</script>
 </body>
 </html>

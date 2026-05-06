@@ -1,17 +1,17 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Software Engineering</title>
+    <title>Data Science</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
-                <img src="images/logo.png" alt="Logo" width="150" height="60" class="me-3">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ url_for('index')}}">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" width="150" height="60" class="me-3">
                 <span>smart unicourse</span>
             </a>
 
@@ -23,7 +23,7 @@
                 <ul class="navbar-nav ms-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="{{ url_for('index')}}">Home</a>
                     </li>
 
                     <li class="nav-item dropdown hover-dropdown">
@@ -31,25 +31,30 @@
                             Majors
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="computer_science.html">Computer Science</a></li>
-                            <li><a class="dropdown-item" href="data_science.html">Data Science</a></li>
-                            <li><a class="dropdown-item" href="software_engineering.html">Software Engineering</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('computer_science')}}">Computer Science</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('data_science')}}">Data Science</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('software_engineering')}}">Software Engineering</a></li>
                         </ul>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="survey.html">Survey</a>
+                        <a class="nav-link" href="{{ url_for('survey')}}">Survey</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Login</a>
+                        <a class="nav-link" href="{{ url_for('login')}}">Login</a>
                     </li>
 
                     <li class="nav-item">
-                      <a class="nav-link avatar-link" href="settings.html">
-                        <span id="navAvatar" class="nav-avatar">U</span>
-                      </a>
+                        <a class="nav-link" href="{{ url_for('signup')}}">Sign Up</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link avatar-link" href="{{ url_for('settings')}}">
+                           <span id="navAvatar" class="nav-avatar">U</span>
+                        </a>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -58,10 +63,10 @@
     <!-- Brief Description of Major -->
     <section class="py-5 intro-section">
         <div class="major-header">
-            <h1 class="major-header-title">Software Engineering</h1>
+            <h1 class="major-header-title">Data Science</h1>
             <div class="major-brief-description">
-                Software Engineering focuses on designing, building, testing, and maintaining software systems. <br>
-                It combines programming skills with project management and software development methods.
+                Data Science focuses on collecting, analysing, and interpreting data. <br>
+                It uses statistics, programming, and machine learning to support decision-making.
             </div>
         </div>
     </section>
@@ -100,9 +105,9 @@
                     <div class="major-content-card">
                         <h3>Courses</h3>
                         <p>
-                            Software Engineering focuses on the full software development process.
-                            Students learn how to design, build, test, maintain, and improve software systems
-                            for real users and organisations.
+                            Data Science focuses on collecting, processing, analysing, and presenting data.
+                            Students learn how to use programming, statistics, databases, and machine learning
+                            to solve real-world problems.
                         </p>
 
                         <div class="table-responsive mt-4">
@@ -116,34 +121,34 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Programming</td>
-                                        <td>Writing code using languages such as Python, Java, C, or JavaScript.</td>
-                                        <td>Programming is the basic tool for creating software systems.</td>
+                                        <td>Programming for Data Science</td>
+                                        <td>Python, R, data processing, and basic coding for data tasks.</td>
+                                        <td>Programming helps students clean, analyse, and automate data work.</td>
                                     </tr>
                                     <tr>
-                                        <td>Software Design</td>
-                                        <td>System design, object-oriented design, architecture, and design patterns.</td>
-                                        <td>Good design makes software easier to build, maintain, and extend.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Software Testing</td>
-                                        <td>Debugging, unit testing, quality assurance, and test planning.</td>
-                                        <td>Testing helps reduce errors and improve software reliability.</td>
+                                        <td>Statistics</td>
+                                        <td>Probability, statistical methods, hypothesis testing, and data interpretation.</td>
+                                        <td>Statistics helps students understand patterns and uncertainty in data.</td>
                                     </tr>
                                     <tr>
                                         <td>Databases</td>
-                                        <td>Database design, SQL, data storage, and data management.</td>
-                                        <td>Most software applications need to store and manage data.</td>
+                                        <td>SQL, database design, data storage, and data management.</td>
+                                        <td>Data scientists need to collect and manage data from different sources.</td>
                                     </tr>
                                     <tr>
-                                        <td>Web and Application Development</td>
-                                        <td>Building websites, mobile apps, APIs, and user-facing systems.</td>
-                                        <td>This helps students create practical software products.</td>
+                                        <td>Machine Learning</td>
+                                        <td>Prediction models, classification, clustering, and model evaluation.</td>
+                                        <td>Machine learning helps students build systems that learn from data.</td>
                                     </tr>
                                     <tr>
-                                        <td>Software Project Management</td>
-                                        <td>Teamwork, agile development, version control, documentation, and project planning.</td>
-                                        <td>Real software projects need coordination, communication, and clear development processes.</td>
+                                        <td>Data Visualisation</td>
+                                        <td>Charts, dashboards, reports, and visual storytelling.</td>
+                                        <td>Visualisation helps users understand data more clearly.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Applied Data Projects</td>
+                                        <td>Using data to solve business, science, health, or technology problems.</td>
+                                        <td>Project work helps students connect technical skills with real decisions.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -151,8 +156,8 @@
 
                         <div class="alert alert-info mt-4">
                             For official course information, please check the
-                            <a href="https://www.uwa.edu.au/study/courses/software-engineering" target="_blank">
-                                UWA Software Engineering course page
+                            <a href="https://www.uwa.edu.au/study/courses/data-science" target="_blank">
+                                UWA Data Science course page
                             </a>.
                         </div>
                     </div>
@@ -162,8 +167,8 @@
                     <div class="major-content-card">
                         <h3>Skills</h3>
                         <p>
-                            Software Engineering students develop strong programming skills,
-                            but they also learn how to work in teams and manage complete software projects.
+                            Data Science students develop technical skills for working with data,
+                            as well as communication skills for explaining data-based findings.
                         </p>
 
                         <div class="row mt-4 g-4">
@@ -171,12 +176,12 @@
                                 <div class="info-card h-100">
                                     <h5>Technical Skills</h5>
                                     <ul>
-                                        <li>Programming with common software development languages.</li>
-                                        <li>Designing software systems and application structures.</li>
-                                        <li>Using databases and APIs in software projects.</li>
-                                        <li>Testing, debugging, and improving code quality.</li>
-                                        <li>Using Git and version control in team projects.</li>
-                                        <li>Building web, mobile, or desktop applications.</li>
+                                        <li>Programming with Python, R, or similar tools.</li>
+                                        <li>Cleaning and preparing raw data.</li>
+                                        <li>Using statistics to analyse data.</li>
+                                        <li>Writing SQL queries and working with databases.</li>
+                                        <li>Building and testing machine learning models.</li>
+                                        <li>Creating charts, dashboards, and reports.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -185,101 +190,100 @@
                                 <div class="info-card h-100">
                                     <h5>Transferable Skills</h5>
                                     <ul>
-                                        <li>Teamwork in software development projects.</li>
-                                        <li>Clear communication with technical and non-technical users.</li>
-                                        <li>Project planning and time management.</li>
-                                        <li>Problem solving and logical thinking.</li>
-                                        <li>Writing documentation for software systems.</li>
-                                        <li>Understanding user needs and system requirements.</li>
+                                        <li>Logical thinking and problem solving.</li>
+                                        <li>Explaining data results in simple language.</li>
+                                        <li>Making decisions based on evidence.</li>
+                                        <li>Working with business or research questions.</li>
+                                        <li>Teamwork in data projects.</li>
+                                        <li>Learning new data tools and technologies.</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="skill-tags mt-4">
-                            <span class="badge bg-primary">Programming</span>
-                            <span class="badge bg-primary">Software Design</span>
-                            <span class="badge bg-primary">Testing</span>
-                            <span class="badge bg-primary">Git</span>
-                            <span class="badge bg-primary">Project Management</span>
-                            <span class="badge bg-primary">Teamwork</span>
+                            <span class="badge bg-primary">Python</span>
+                            <span class="badge bg-primary">Statistics</span>
+                            <span class="badge bg-primary">SQL</span>
+                            <span class="badge bg-primary">Machine Learning</span>
+                            <span class="badge bg-primary">Data Visualisation</span>
+                            <span class="badge bg-primary">Problem Solving</span>
                         </div>
                     </div>
                 </div>
 
-                //careers
                 <div class="tab-pane fade" id="careers" role="tabpanel">
                     <div class="major-content-card">
                         <h3>Careers</h3>
                         <p>
-                            Software Engineering graduates can work in technology companies,
-                            banks, consulting firms, government departments, startups,
-                            and organisations that build or maintain digital systems.
+                            Data Science graduates can work in technology companies, banks,
+                            consulting firms, government departments, healthcare organisations,
+                            research teams, and many other data-driven workplaces.
                         </p>
 
                         <div class="row mt-4 g-4">
                             <div class="col-md-4">
                                 <div class="info-card h-100">
-                                    <h5>Software Engineer</h5>
+                                    <h5>Data Analyst</h5>
                                     <p>
-                                        Software engineers design, develop, test, and maintain software systems.
+                                        Data analysts clean, analyse, and present data to support business or organisational decisions.
                                     </p>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="info-card h-100">
-                                    <h5>Application Developer</h5>
+                                    <h5>Data Scientist</h5>
                                     <p>
-                                        Application developers build desktop, mobile, or web applications for users.
+                                        Data scientists use statistics, programming, and machine learning to find insights from complex data.
                                     </p>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="info-card h-100">
-                                    <h5>Web Developer</h5>
+                                    <h5>Business Analyst</h5>
                                     <p>
-                                        Web developers create websites and online systems using front-end and back-end technologies.
+                                        Business analysts connect data findings with business needs and help organisations improve decisions.
                                     </p>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="info-card h-100">
-                                    <h5>Software Tester</h5>
+                                    <h5>Machine Learning Assistant</h5>
                                     <p>
-                                        Software testers check software quality, find bugs, and help improve reliability.
+                                        Machine learning assistants support model building, testing, and data preparation.
                                     </p>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="info-card h-100">
-                                    <h5>Systems Analyst</h5>
+                                    <h5>Database Analyst</h5>
                                     <p>
-                                        Systems analysts study user needs and help design software solutions for organisations.
+                                        Database analysts help manage, organise, and check data stored in databases.
                                     </p>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="info-card h-100">
-                                    <h5>DevOps Assistant</h5>
+                                    <h5>Research Analyst</h5>
                                     <p>
-                                        DevOps assistants support deployment, automation, version control, and system operations.
+                                        Research analysts use data to support academic, government, or industry research projects.
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                //fee
+
                 <div class="tab-pane fade" id="fees" role="tabpanel">
                     <div class="major-content-card">
                         <h3>Fees</h3>
                         <p>
-                            Tuition fees for Software Engineering may vary depending on the university,
+                            Tuition fees for Data Science may vary depending on the university,
                             student status, study load, and selected units. Domestic and international students
                             may have different fee structures.
                         </p>
@@ -321,7 +325,7 @@
                     <div class="major-content-card">
                         <h3>Scholarships</h3>
                         <p>
-                            Software Engineering students may be able to apply for different types of scholarships.
+                            Data Science students may be able to apply for different types of scholarships.
                             These scholarships can support students based on academic achievement,
                             financial need, background, leadership, or study area.
                         </p>
@@ -348,8 +352,8 @@
                                         <td>For eligible international students based on university rules.</td>
                                     </tr>
                                     <tr>
-                                        <td>Engineering or STEM-related Scholarship</td>
-                                        <td>For students studying engineering, technology, science, or mathematics areas.</td>
+                                        <td>STEM-related Scholarship</td>
+                                        <td>For students studying science, technology, engineering, or mathematics areas.</td>
                                     </tr>
                                     <tr>
                                         <td>Leadership or Community Scholarship</td>
@@ -367,15 +371,14 @@
                             for current scholarship options.
                         </div>
                     </div>
-                </div>  
+                </div>
 
                 <div class="tab-pane fade" id="admission" role="tabpanel">
                     <div class="major-content-card">
                         <h3>Admission Requirements</h3>
                         <p>
-                            Admission requirements for Software Engineering depend on the university,
-                            course structure, and the applicant's background. Students usually need to meet
-                            academic entry requirements and English language requirements.
+                            Admission requirements for Data Science depend on the university and the applicant's background.
+                            Students usually need to meet academic entry requirements and English language requirements.
                         </p>
 
                         <div class="row mt-4 g-4">
@@ -385,8 +388,8 @@
                                     <ul>
                                         <li>Completion of high school or equivalent qualification.</li>
                                         <li>Meeting the required ATAR or equivalent entry score.</li>
-                                        <li>Mathematics background is often recommended or required.</li>
-                                        <li>Some engineering courses may require specific science or mathematics subjects.</li>
+                                        <li>Mathematics background may be recommended or required.</li>
+                                        <li>Some pathway students may enter through diploma or foundation programs.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -407,8 +410,7 @@
                             <h5>Pathway Options</h5>
                             <p>
                                 Students who do not meet direct entry requirements may consider foundation programs,
-                                diploma pathways, internal transfer options, or related computing and engineering pathways,
-                                depending on the university.
+                                diploma pathways, or internal transfer options, depending on the university.
                             </p>
                         </div>
 
@@ -422,115 +424,113 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="tab-pane fade" id="discussion" role="tabpanel">
-                    <div class="discussion-section">
-                        <h3>Discussion Board</h3>
-                        <p class="text-muted">Share your thoughts or questions about Software Engineering.</p>
+                  <div class="discussion-section">
+                      <h3>Discussion Board</h3>
+                      <p class="text-muted">Share your thoughts or questions about Data Science.</p>
 
-                        <!--
-                          TODO
-                          Replace localStorage with database records.
-                          Suggested backend APIs:
-                          GET /api/majors/software-engineering/comments
-                          POST /api/majors/software-engineering/comments
-                          GET /api/my-comments
-                        -->
+                      <!--
+                        TODO
+                        Replace localStorage with database records.
+                        Suggested backend APIs:
+                        GET /api/majors/data-science/comments
+                        POST /api/majors/data-science/comments
+                        GET /api/my-comments
+                      -->
 
-                        <form id="commentForm" class="mb-4">
-                            <div class="mb-3">
-                                <label for="commentInput" class="form-label">Add a comment</label>
-                                <textarea id="commentInput" class="form-control" rows="3" placeholder="Write your comment here..."></textarea>
-                            </div>
+                      <form id="commentForm" class="mb-4">
+                          <div class="mb-3">
+                              <label for="commentInput" class="form-label">Add a comment</label>
+                              <textarea id="commentInput" class="form-control" rows="3" placeholder="Write your comment here..."></textarea>
+                          </div>
 
-                            <button type="submit" class="btn custom-btn">Post Comment</button>
-                        </form>
+                          <button type="submit" class="btn custom-btn">Post Comment</button>
+                      </form>
 
-                        <div id="commentList" class="comment-list">
-                            <!-- Comments will be inserted by JavaScript -->
-                        </div>
-                    </div>
-                </div>
+                      <div id="commentList" class="comment-list">
+                          <!-- Comments will be inserted by JavaScript -->
+                      </div>
+                  </div>
+              </div>
             </div>
         </div>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
     <script>
-    // Temporary front-end discussion board for Software Engineering.
+    // Temporary front-end discussion board for Data Science.
     // TODO for backend:
     // Replace localStorage with real database comments.
     // Each comment should include: id, user_id, username, major_id, content, created_at.
+      const majorName = "Data Science";
+      const majorPageUrl = "{{ url_for('data_science')}}";
+      const commentStorageKey = "comments_data_science";
 
-        const majorName = "Software Engineering";
-        const majorPageUrl = "software_engineering.html";
-        const commentStorageKey = "comments_software_engineering";
+      const commentForm = document.getElementById("commentForm");
+      const commentInput = document.getElementById("commentInput");
+      const commentList = document.getElementById("commentList");
 
-        const commentForm = document.getElementById("commentForm");
-        const commentInput = document.getElementById("commentInput");
-        const commentList = document.getElementById("commentList");
+      function loadComments() {
+          const comments = JSON.parse(localStorage.getItem(commentStorageKey)) || [];
 
-        function loadComments() {
-            const comments = JSON.parse(localStorage.getItem(commentStorageKey)) || [];
+          commentList.innerHTML = "";
 
-            commentList.innerHTML = "";
+          if (comments.length === 0) {
+              commentList.innerHTML = `<p class="text-muted">No comments yet. Be the first to comment.</p>`;
+              return;
+          }
 
-            if (comments.length === 0) {
-                commentList.innerHTML = `<p class="text-muted">No comments yet. Be the first to comment.</p>`;
-                return;
-            }
+          comments.forEach(function(comment) {
+              const commentItem = document.createElement("div");
+              commentItem.className = "comment-item";
 
-            comments.forEach(function(comment) {
-                const commentItem = document.createElement("div");
-                commentItem.className = "comment-item";
+              commentItem.innerHTML = `
+                  <div class="d-flex justify-content-between align-items-start">
+                      <div>
+                          <h6 class="mb-1">${comment.username}</h6>
+                          <p class="mb-1">${comment.content}</p>
+                          <small class="text-muted">${comment.date}</small>
+                      </div>
+                  </div>
+              `;
 
-                commentItem.innerHTML = `
-                    <div class="d-flex justify-content-between align-items-start">
-                        <div>
-                            <h6 class="mb-1">${comment.username}</h6>
-                            <p class="mb-1">${comment.content}</p>
-                            <small class="text-muted">${comment.date}</small>
-                        </div>
-                    </div>
-                `;
+              commentList.appendChild(commentItem);
+          });
+      }
 
-                commentList.appendChild(commentItem);
-            });
-        }
+      commentForm.addEventListener("submit", function(event) {
+          event.preventDefault();
 
-        commentForm.addEventListener("submit", function(event) {
-            event.preventDefault();
+          const content = commentInput.value.trim();
 
-            const content = commentInput.value.trim();
+          if (!content) {
+              alert("Please write a comment.");
+              return;
+          }
 
-            if (!content) {
-                alert("Please write a comment.");
-                return;
-            }
+          const username = localStorage.getItem("username") || "User";
 
-            const username = localStorage.getItem("username") || "User";
+          const newComment = {
+              majorName: majorName,
+              pageUrl: majorPageUrl,
+              username: username,
+              content: content,
+              date: new Date().toLocaleDateString()
+          };
 
-            const newComment = {
-                majorName: majorName,
-                pageUrl: majorPageUrl,
-                username: username,
-                content: content,
-                date: new Date().toLocaleDateString()
-            };
+          const comments = JSON.parse(localStorage.getItem(commentStorageKey)) || [];
+          comments.unshift(newComment);
 
-            const comments = JSON.parse(localStorage.getItem(commentStorageKey)) || [];
-            comments.unshift(newComment);
+          localStorage.setItem(commentStorageKey, JSON.stringify(comments));
 
-            localStorage.setItem(commentStorageKey, JSON.stringify(comments));
+          commentInput.value = "";
+          loadComments();
 
-            commentInput.value = "";
-            loadComments();
+          alert("Comment posted.");
+      });
 
-            alert("Comment posted.");
-        });
-
-        loadComments();
-    </script>
+      loadComments();
+  </script>
 </body>
 </html>
