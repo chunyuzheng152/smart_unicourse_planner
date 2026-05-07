@@ -1,26 +1,32 @@
+from datetime import datetime, timezone
+from typing import Optional
+import sqlalchemy as sa
+import sqlalchemy.orm as so
 from project import db
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    displayName = db.Column(db.String(50), nullable=False)
-    password = db.Column(db.String(50), nullable=False)
-    emailAddress = db.Column(db.String(50), nullable=False)
-    avatar = db.Column(db.LargeBinary, nullable=True)
+    id = so.Mapped[int] = so.mapped_column(primary_key=True)
+    username = so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
+    email = so.Mapped[str] = so.mapped_column(sa.String(120), index=True, unique=True)
+    password_hash = so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
+
+    #__repr method created tells python how to print object, useful for debugging 
+    def __repr__(self): 
+        return '<User {}>'.format(self.username)
 
 class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    major = db.Column(db.String(50), nullable=False)
-    userID = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    comment = db.Column(db.String(100), nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    id = so.Mapped[int] = so.mapped_column(primary_key=True)
+    content = so.Mapped[str] = so.mapped_column(sa.String(500))
+    created_at = so.Mapped[datetime] = so.mapped_column(index=True, default=lambda: datetime.now(timezone.utc))
+    user_id = so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id), index=True)
 
 class Survey(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    userID = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    q1 = db.Column(db.Integer, nullable=False)
-    q2 = db.Column(db.Integer, nullable=False)
-    q3 = db.Column(db.Integer, nullable=False)
-    q4 = db.Column(db.Integer, nullable=False)
-    q5 = db.Column(db.Integer, nullable=False)
-    q6 = db.Column(db.Integer, nullable=False)
-    q7 = db.Column(db.Integer, nullable=False)
+    id = so.Mapped[int] = so.mapped_column(primary_key=True)
+    q1 = so.Mapped[int] = so.mapped_column(nullable=False)
+    q2 = so.Mapped[int] = so.mapped_column(nullable=False)
+    q3 = so.Mapped[int] = so.mapped_column(nullable=False)
+    q4 = so.Mapped[int] = so.mapped_column(nullable=False)
+    q5 = so.Mapped[int] = so.mapped_column(nullable=False)
+    q6 = so.Mapped[int] = so.mapped_column(nullable=False)
+    q7 = so.Mapped[int] = so.mapped_column(nullable=False)
+    user_id = so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id), nullable=False)
