@@ -122,9 +122,11 @@
             GET /api/survey/results
           -->
 
-          <button class="btn custom-btn mt-3" onclick="nextCard()">Start Survey</button>
+          <button type="button" class="btn custom-btn mt-3" onclick="nextCard()">Start Survey</button>
         </div>
 
+        <form id="surveyForm" method="POST" action="{{ url_for('survey') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <!-- Question 1 -->
         <div class="survey-card">
           <p class="survey-progress">Question 1 of 7</p>
@@ -138,8 +140,8 @@
           </div>
 
           <div class="survey-buttons">
-            <button class="btn btn-outline-secondary" onclick="prevCard()">Previous</button>
-            <button class="btn custom-btn" onclick="nextCard()">Next</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="prevCard()">Previous</button>
+            <button type="button" class="btn custom-btn" onclick="nextCard()">Next</button>
           </div>
         </div>
 
@@ -158,8 +160,8 @@
           </div>
 
           <div class="survey-buttons">
-            <button class="btn btn-outline-secondary" onclick="prevCard()">Previous</button>
-            <button class="btn custom-btn" onclick="nextCard()">Next</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="prevCard()">Previous</button>
+            <button type="button" class="btn custom-btn" onclick="nextCard()">Next</button>
           </div>
         </div>
 
@@ -178,8 +180,8 @@
           </div>
 
           <div class="survey-buttons">
-            <button class="btn btn-outline-secondary" onclick="prevCard()">Previous</button>
-            <button class="btn custom-btn" onclick="nextCard()">Next</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="prevCard()">Previous</button>
+            <button type="button" class="btn custom-btn" onclick="nextCard()">Next</button>
           </div>
         </div>
 
@@ -196,8 +198,8 @@
           </div>
 
           <div class="survey-buttons">
-            <button class="btn btn-outline-secondary" onclick="prevCard()">Previous</button>
-            <button class="btn custom-btn" onclick="nextCard()">Next</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="prevCard()">Previous</button>
+            <button type="button" class="btn custom-btn" onclick="nextCard()">Next</button>
           </div>
         </div>
 
@@ -217,8 +219,8 @@
           </div>
 
           <div class="survey-buttons">
-            <button class="btn btn-outline-secondary" onclick="prevCard()">Previous</button>
-            <button class="btn custom-btn" onclick="nextCard()">Next</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="prevCard()">Previous</button>
+            <button type="button" class="btn custom-btn" onclick="nextCard()">Next</button>
           </div>
         </div>
 
@@ -235,8 +237,8 @@
           </div>
 
           <div class="survey-buttons">
-            <button class="btn btn-outline-secondary" onclick="prevCard()">Previous</button>
-            <button class="btn custom-btn" onclick="nextCard()">Next</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="prevCard()">Previous</button>
+            <button type="button" class="btn custom-btn" onclick="nextCard()">Next</button>
           </div>
         </div>
 
@@ -252,10 +254,12 @@
           </div>
 
           <div class="survey-buttons">
-            <button class="btn btn-outline-secondary" onclick="prevCard()">Previous</button>
-            <button class="btn custom-btn" onclick="submitSurvey()">Submit</button>
+            <button type="button"  class="btn btn-outline-secondary" onclick="prevCard()">Previous</button>
+            <button type="submit"  class="btn custom-btn">Submit</button>
           </div>
         </div>
+
+        </form>
 
         <!-- Result Page -->
         <div class="survey-card" id="resultCard">
@@ -269,7 +273,7 @@
           </div>
 
           <div class="survey-buttons">
-            <button class="btn btn-outline-secondary" onclick="restartSurvey()">Do Again</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="restartSurvey()">Do Again</button>
             <a href="{{ url_for('index')}}" class="btn custom-btn">Back to Home</a>
           </div>
         </div>
@@ -393,6 +397,18 @@
 
       showCard(0);
     }
+
+    document.getElementById("surveyForm").addEventListener("submit", function(event) {
+        for (let i = 1; i <= 7; i++) {
+          const selected = document.querySelector(`input[name="q${i}"]:checked`);
+
+          if (!selected) {
+            event.preventDefault();
+            alert("Please answer all questions before submitting.");
+            return;
+          }
+        }
+      });
   </script>
 </body>
 </html>

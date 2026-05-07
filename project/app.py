@@ -1,8 +1,10 @@
 from flask import Flask, flash,render_template,request,redirect,url_for
+from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "dev-secret-key"
 
+csrf = CSRFProtect(app)
 
 @app.route("/")
 def index():
@@ -48,10 +50,27 @@ def data_science():
 def software_engineering():
     return render_template("software_engineering.html")
 
-@app.route("/survey")
+@app.route("/survey", methods=["GET", "POST"])
 def survey():
-    return render_template("survey.html")
+    if request.method == "POST":
+        q1 = request.form.get("q1")
+        q2 = request.form.get("q2")
+        q3 = request.form.get("q3")
+        q4 = request.form.get("q4")
+        q5 = request.form.get("q5")
+        q6 = request.form.get("q6")
+        q7 = request.form.get("q7")
 
+        if not all([q1, q2, q3, q4, q5, q6, q7]):
+            flash("Please answer all questions.")
+            return redirect(url_for("survey"))
+
+        # TODO: save survey answers to database here
+
+        flash("Survey submitted.")
+        return redirect(url_for("index"))
+
+    return render_template("survey.html")
 if __name__ == "__main__":
     app.run(debug = True)
 
