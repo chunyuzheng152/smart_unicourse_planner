@@ -65,6 +65,7 @@
         <h1>Login</h1>
 
         <form method = "POST" action="{{ url_for('login') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           <div class="mb-3">
             <label for="usn" class="form-label">Username</label>
             <input type="text" id="usn" name="username" class="form-control" required placeholder="Enter your username">
