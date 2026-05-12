@@ -1,10 +1,19 @@
-from flask import Flask, flash,render_template,request,redirect,url_for
+from flask import Flask, flash,render_template,request,redirect,url_for,jsonify
 from flask_wtf.csrf import CSRFProtect
+from project.models import Comment
+from project import db
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "dev-secret-key"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+db.init_app(app)
 csrf = CSRFProtect(app)
+with app.app_context():
+    db.create_all()
+
+
 
 @app.route("/")
 def index():
@@ -30,7 +39,35 @@ def signup():
         return redirect(url_for("login"))
     return render_template("signup.html")
 
+@app.route("/comments", methods=["POST"])
+def add_comment():
+    content = request.form.get("content")
+    print("Comment received by backend:", content,flush=True)
 
+    if not content:
+        flash("Comment cannot be empty.")
+        return redirect(request.referrer or url_for("index"))
+
+
+    new_comment = Comment(content = content)
+    db.session.add(new_comment)
+    db.session.commit()
+
+    flash("Comment added successfully.")
+    return redirect(request.referrer or url_for("index"))
+
+@app.route("/api/charts")
+def chart_data():
+    return jsonify({
+        "popular_majors":{
+            "labels":["Computer Science", "Data Science", "Software Engineering"],
+            "values":[12,8,10]
+        },
+        "choice_reasons":{
+            "labels":["Job opportunities", "Interest", "Salary", "Enjoy coding"],
+            "values":[9,6,5,8]
+        }
+    })
 
 
 @app.route("/settings")
