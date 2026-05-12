@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 from typing import Optional
 from project import db
-from datetime import datetime, timezone 
+from datetime import datetime, timezone
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -12,6 +13,12 @@ class User(db.Model):
     #__repr method tells python how to print object, useful for debugging 
     def __repr__(self): 
         return '<User {}>'.format(self.username)
+
+    #password hash functions
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
