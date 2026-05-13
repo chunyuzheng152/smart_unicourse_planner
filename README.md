@@ -6,6 +6,18 @@ cameron wright 23508669
 yupei zhou 24306764
 course_selector_tool
 
+## Environment Variables
+
+This project requires a `.env` file in the project root.
+MUST:
+Create a .env file in the project root based on .env.example:
+
+APP_SECRET_KEY=dev-secret-key-change-this
+APP_DATABASE_URL=sqlite:///project/app.db
+
+
+pip install -r requirements.txt
+python -m project.app
 
 Flask
 Flask-WTF

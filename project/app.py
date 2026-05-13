@@ -3,7 +3,7 @@ from flask_wtf.csrf import CSRFProtect
 
 from project import db, migrate
 from project.config import Config
-from project.models import User, Survey
+from project.models import User, Survey, Comment, Major
 import os
 from werkzeug.utils import secure_filename
 
@@ -21,9 +21,38 @@ def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 db.init_app(app)
 migrate.init_app(app, db)
-
-db.init_app(app)
 csrf = CSRFProtect(app)
+
+MAJOR_MAP = {
+    "computer-science": {
+        "name": "Computer Science",
+        "endpoint": "computer_science"
+    },
+    "data-science": {
+        "name": "Data Science",
+        "endpoint": "data_science"
+    },
+    "software-engineering": {
+        "name": "Software Engineering",
+        "endpoint": "software_engineering"
+    }
+}
+
+
+def get_or_create_major(major_slug):
+    major_data = MAJOR_MAP.get(major_slug)
+
+    if not major_data:
+        return None
+
+    major = Major.query.filter_by(name=major_data["name"]).first()
+
+    if not major:
+        major = Major(name=major_data["name"], description="")
+        db.session.add(major)
+        db.session.commit()
+
+    return major
 
 
 @app.route("/")
@@ -146,22 +175,61 @@ def settings():
         flash("No file selected.")
         return redirect(url_for("settings"))
 
-    return render_template("settings.html", user=user)
+    my_comments = Comment.query.filter_by(user_id=user_id).order_by(Comment.created_at.desc()).all()
+    return render_template("settings.html", user=user, my_comments=my_comments)  
 
 @app.route("/computer-science")
 def computer_science():
-    return render_template("computer_science.html")
+    major = get_or_create_major("computer-science")
+    comments = Comment.query.filter_by(major_id=major.id).order_by(Comment.created_at.desc()).all()
+    return render_template("computer_science.html", major=major, comments=comments)
 
 
 @app.route("/data-science")
 def data_science():
-    return render_template("data_science.html")
+    major = get_or_create_major("data-science")
+    comments = Comment.query.filter_by(major_id=major.id).order_by(Comment.created_at.desc()).all()
+    return render_template("data_science.html", major=major, comments=comments)
 
 
 @app.route("/software-engineering")
 def software_engineering():
-    return render_template("software_engineering.html")
+    major = get_or_create_major("software-engineering")
+    comments = Comment.query.filter_by(major_id=major.id).order_by(Comment.created_at.desc()).all()
+    return render_template("software_engineering.html", major=major, comments=comments)
 
+@app.route("/add-comment", methods=["POST"])
+def add_comment():
+    user_id = session.get("user_id")
+
+    if not user_id:
+        flash("Please log in before posting a comment.")
+        return redirect(url_for("login"))
+
+    content = request.form.get("content", "").strip()
+    major_slug = request.form.get("major_slug")
+
+    if not content:
+        flash("Comment cannot be empty.")
+        return redirect(url_for(MAJOR_MAP[major_slug]["endpoint"]) + "#discussion")
+
+    major = get_or_create_major(major_slug)
+
+    if not major:
+        flash("Invalid major.")
+        return redirect(url_for("index"))
+
+    comment = Comment(
+        content=content,
+        user_id=user_id,
+        major_id=major.id
+    )
+
+    db.session.add(comment)
+    db.session.commit()
+
+    flash("Comment posted.")
+    return redirect(url_for(MAJOR_MAP[major_slug]["endpoint"]) + "#discussion")
 
 @app.route("/survey", methods=["GET", "POST"])
 def survey():
