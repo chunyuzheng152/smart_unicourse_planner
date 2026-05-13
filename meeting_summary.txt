@@ -1,0 +1,37 @@
+Frontend members started planning the page layout. chunuyu
+Backend/database members started thinking about user accounts, comments, favourites, and survey data. cameron&yupei
+
+checkpoint2 flask jinja database
+
+Wednesday, 29 April, 1:00 pm – 3:00 pm
+The frontend pages should be converted into Jinja templates.
+The website should allow users to view majors, save favourites, leave comments, and complete a survey.
+We discussed that the database needs to store users, majors, comments, favourites, and survey responses.
+Frontend continued improving the layout and navigation.
+Backend worked on routes and page rendering.
+Database worked on models and database connection.
+
+
+Wednesday, 6 May, 1:00 pm – 3:00 pm
+We need to make sure the website can run properly with Flask.
+We need to add testing files for the project.
+We also need to prepare a clear README file explaining how to run the project.
+Frontend checked page links and layout issues.
+Backend continued working on Flask routes and database connection.
+Testing work started, including unit tests and Selenium tests.
+Team members were asked to use GitHub issues and pull requests more clearly.
+
+7 may,checkpoint3
+
+Wednesday, 13 May, 1:00 pm – 3:00 pm
+
+The latest backend and database work should be pushed to GitHub and opened as pull requests.
+The README needs to explain the setup steps, dependencies, database setup, and how to run tests.
+We need to check security requirements, including password hashing, CSRF tokens, and environment variables.
+We need at least 5 unit tests and 5 Selenium tests.
+
+Tasks assigned:
+Backend/database members need to push the latest code and README updates.
+Testing members continue writing and checking test files.
+Everyone should review pull requests and leave comments on GitHub.
+Final checks should focus on routes, database storage, testing, and security.
