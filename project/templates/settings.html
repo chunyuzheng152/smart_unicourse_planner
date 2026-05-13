@@ -148,7 +148,21 @@
           <p class="text-muted">View comments you posted under major pages.</p>
 
           <div id="myCommentsList" class="my-comments-list">
-            <!-- Demo comments will be inserted by JavaScript -->
+            {% if my_comments %}
+              {% for comment in my_comments %}
+                <div class="comment-item">
+                  <h6 class="mb-1">
+                    {{ comment.major.name if comment.major else "Major" }}
+                  </h6>
+                  <p class="mb-1">{{ comment.content }}</p>
+                  <small class="text-muted">
+                    {{ comment.created_at.strftime("%Y-%m-%d %H:%M") }}
+                  </small>
+                </div>
+              {% endfor %}
+            {% else %}
+              <p class="text-muted">You have not posted any comments yet.</p>
+            {% endif %}
           </div>
         </div>
 
@@ -206,11 +220,6 @@
       });
     }
 
-    const myCommentsList = document.getElementById("myCommentsList");
-
-    if (myCommentsList) {
-      myCommentsList.innerHTML = `<p class="text-muted">Comments backend is not connected yet.</p>`;
-    }
   </script>
 </body>
 </html>
