@@ -13,6 +13,14 @@ fetch("/api/charts")
                         label: "Popular Majors",
                         data: data.popular_majors.values
                     }]
+                },
+                options:{
+                    responsive: true,
+                    scales:{
+                        y:{
+                           beginAtZero: true     
+                        }
+                    }
                 }
             });
         }
@@ -26,7 +34,15 @@ fetch("/api/charts")
                         label: "Major Choice Reasons",
                         data: data.choice_reasons.values
                     }]
+                },
+                options:{
+                    responsive:true
                 }
             });
         }
+    })
+
+    .catch(error => {
+        console.error("Errir loading chart data:", error);
+
     });
