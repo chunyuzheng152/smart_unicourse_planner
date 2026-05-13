@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ url_for('index') }}">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" width="150" height="60" class="me-3">
+      <span>smart unicourse</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+        </li>
+
+        <li class="nav-item dropdown hover-dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            Majors
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ url_for('computer_science') }}">Computer Science</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('data_science') }}">Data Science</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('software_engineering') }}">Software Engineering</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('survey') }}">Survey</a>
+        </li>
+
+        {% if session.get("user_id") %}
+          <li class="nav-item">
+            <span class="nav-link">Hi, {{ session.get("username") }}</span>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link avatar-link" href="{{ url_for('settings') }}">
+
+              {% if session.get("avatar_filename") %}
+                {% set avatar_url = url_for("static", filename="uploads/avatars/" ~ session.get("avatar_filename")) %}
+
+                <span class="nav-avatar"
+                      style="background-image: url('{{ avatar_url }}');
+                            background-size: cover;
+                            background-position: center;">
+                </span>
+
+              {% else %}
+                <span class="nav-avatar">
+                  {{ session.get("username", "U")[0]|upper }}
+                </span>
+              {% endif %}
+
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a>
+          </li>
+        {% endif %}
+
+      </ul>
+    </div>
+  </div>
+</nav>

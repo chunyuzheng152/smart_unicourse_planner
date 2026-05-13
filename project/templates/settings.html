@@ -10,53 +10,7 @@
 
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ url_for('index')}}">
-       <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" width="150" height="60" class="me-3">
-        <span>smart unicourse</span>
-      </a>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav ms-auto">
-
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('index')}}">Home</a>
-          </li>
-
-          <li class="nav-item dropdown hover-dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-              Majors
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{{ url_for('computer_science')}}">Computer Science</a></li>
-              <li><a class="dropdown-item" href="{{ url_for('data_science')}}">Data Science</a></li>
-              <li><a class="dropdown-item" href="{{ url_for('software_engineering')}}">Software Engineering</a></li>
-            </ul>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('survey')}}">Survey</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('login')}}">Login</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link avatar-link active" href="{{ url_for('settings')}}">
-              <span id="navAvatar" class="nav-avatar">U</span>
-            </a>
-          </li>
-
-        </ul>
-      </div>
-    </div>
-  </nav>
+  {% include "_navbar.html" %}
 
   <!-- Settings Header -->
   <section class="py-5 intro-section">
@@ -65,6 +19,16 @@
       <p class="text-muted fs-5 mb-0">
         Manage your profile, email, password, and comments.
       </p>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
     </div>
   </section>
 
@@ -102,27 +66,35 @@
         <div class="settings-panel active" id="userPanel">
           <h2>User</h2>
           <p class="text-muted">Manage your display name and avatar.</p>
+            <form id="profileForm" method="POST" action="{{ url_for('settings') }}" enctype="multipart/form-data">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-          <form id="profileForm">
-            <div class="text-center mb-4">
-              <span id="profileAvatarPreview" class="profile-avatar-preview">U</span>
-            </div>
+              <div class="text-center mb-4">
+                {% if user and user.avatar_filename %}
+                  <img src="{{ url_for('static', filename='uploads/avatars/' ~ user.avatar_filename) }}"
+                      alt="Avatar"
+                      class="profile-avatar-preview"
+                      style="object-fit: cover;">
+                {% else %}
+                  <span class="profile-avatar-preview">
+                    {{ session.get("username", "U")[0]|upper }}
+                  </span>
+                {% endif %}
+              </div>
 
-            <div class="mb-3">
-              <label for="username" class="form-label">Display Name</label>
-              <input type="text" id="username" class="form-control" placeholder="Enter your display name">
-            </div>
+              <div class="mb-3">
+                <label for="avatar" class="form-label">Upload Avatar</label>
+                <input type="file" id="avatar" name="avatar" class="form-control" accept="image/png, image/jpeg, image/webp">
+              </div>
 
-            <div class="mb-3">
-              <label for="avatarUpload" class="form-label">Upload Avatar</label>
-              <input type="file" id="avatarUpload" class="form-control" accept="image/*">
-            </div>
+              <button type="submit" name="action" value="save_profile" class="btn custom-btn">
+                Save Profile
+              </button>
 
-            <button type="submit" class="btn custom-btn">Save Profile</button>
-            <button type="button" id="removeAvatarBtn" class="btn btn-outline-secondary ms-2">
-              Remove Avatar
-            </button>
-          </form>
+              <button type="submit" name="action" value="remove_avatar" class="btn btn-outline-secondary ms-2">
+                Remove Avatar
+              </button>
+            </form>
         </div>
 
         <!-- Email Panel -->
@@ -146,8 +118,6 @@
         </div>
 
         <!-- Password Panel -->
-
-        //Password update demo completed. Backend is needed for real password changes
         <div class="settings-panel" id="passwordPanel">
           <h2>Password</h2>
           <p class="text-muted">Change your account password.</p>
@@ -192,25 +162,6 @@
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
   <script>
-    // TODO:
-    // Replace localStorage with real API requests when the backend is ready.
-
-    const usernameInput = document.getElementById("username");
-    const avatarUpload = document.getElementById("avatarUpload");
-    const profileForm = document.getElementById("profileForm");
-    const removeAvatarBtn = document.getElementById("removeAvatarBtn");
-    const profileAvatarPreview = document.getElementById("profileAvatarPreview");
-
-    const currentEmailInput = document.getElementById("currentEmail");
-    const newEmailInput = document.getElementById("newEmail");
-    const emailForm = document.getElementById("emailForm");
-
-    const passwordForm = document.getElementById("passwordForm");
-    const oldPasswordInput = document.getElementById("oldPassword");
-    const newPasswordInput = document.getElementById("newPassword");
-    const confirmPasswordInput = document.getElementById("confirmPassword");
-
-    const myCommentsList = document.getElementById("myCommentsList");
     const sidebarButtons = document.querySelectorAll(".settings-sidebar-btn");
     const settingsPanels = document.querySelectorAll(".settings-panel");
 
@@ -231,164 +182,35 @@
       });
     });
 
-    function getInitialsForSettings(name) {
-      if (!name) {
-        return "U";
-      }
+    const emailForm = document.getElementById("emailForm");
+    const currentEmailInput = document.getElementById("currentEmail");
+    const newEmailInput = document.getElementById("newEmail");
 
-      const words = name.trim().split(" ");
-
-      if (words.length === 1) {
-        return words[0].charAt(0).toUpperCase();
-      }
-
-      return (words[0].charAt(0) + words[1].charAt(0)).toUpperCase();
+    if (currentEmailInput) {
+      currentEmailInput.value = "Email update not connected yet";
     }
 
-    function updateProfilePreview() {
-      const savedName = localStorage.getItem("username") || "User";
-      const savedAvatar = localStorage.getItem("avatarImage");
-
-      if (savedAvatar) {
-        profileAvatarPreview.textContent = "";
-        profileAvatarPreview.style.backgroundImage = `url(${savedAvatar})`;
-        profileAvatarPreview.style.backgroundSize = "cover";
-        profileAvatarPreview.style.backgroundPosition = "center";
-      } else {
-        profileAvatarPreview.textContent = getInitialsForSettings(savedName);
-        profileAvatarPreview.style.backgroundImage = "none";
-      }
-    }
-
-    usernameInput.value = localStorage.getItem("username") || "User";
-    currentEmailInput.value = localStorage.getItem("email") || "user@example.com";
-
-    updateProfilePreview();
-
-    profileForm.addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      const username = usernameInput.value.trim();
-
-      if (username) {
-        localStorage.setItem("username", username);
-      }
-
-      const file = avatarUpload.files[0];
-
-      if (file) {
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-          localStorage.setItem("avatarImage", e.target.result);
-          updateNavbarAvatar();
-          updateProfilePreview();
-          alert("Profile saved.");
-        };
-
-        reader.readAsDataURL(file);
-      } else {
-        updateNavbarAvatar();
-        updateProfilePreview();
-        alert("Profile saved.");
-      }
-    });
-
-    removeAvatarBtn.addEventListener("click", function() {
-      localStorage.removeItem("avatarImage");
-      updateNavbarAvatar();
-      updateProfilePreview();
-      alert("Avatar removed.");
-    });
-
-    emailForm.addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      const newEmail = newEmailInput.value.trim();
-
-      if (!newEmail) {
-        alert("Please enter a new email.");
-        return;
-      }
-
-      localStorage.setItem("email", newEmail);
-      currentEmailInput.value = newEmail;
-      newEmailInput.value = "";
-
-      alert("Email updated.");
-    });
-
-    passwordForm.addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      const oldPassword = oldPasswordInput.value.trim();
-      const newPassword = newPasswordInput.value.trim();
-      const confirmPassword = confirmPasswordInput.value.trim();
-
-      if (!oldPassword || !newPassword || !confirmPassword) {
-        alert("Please fill in all password fields.");
-        return;
-      }
-
-      if (newPassword !== confirmPassword) {
-        alert("The new passwords do not match.");
-        return;
-      }
-
-      // This is only a front-end demo.
-      // Do not store real passwords in localStorage.
-      oldPasswordInput.value = "";
-      newPasswordInput.value = "";
-      confirmPasswordInput.value = "";
-
-      alert("Password update demo completed. Backend is needed for real password changes.");
-    });
-
-    function loadDemoComments() {
-      // demo
-      const allComments = [];
-
-      const majorCommentKeys = [
-        "comments_computer_science",
-        "comments_data_science",
-        "comments_software_engineering"
-      ];
-
-      majorCommentKeys.forEach(function(key) {
-        const comments = JSON.parse(localStorage.getItem(key)) || [];
-
-        comments.forEach(function(comment) {
-          allComments.push(comment);
-        });
-      });
-
-      myCommentsList.innerHTML = "";
-
-      if (allComments.length === 0) {
-        myCommentsList.innerHTML = `<p class="text-muted">You have not posted any comments yet.</p>`;
-        return;
-      }
-
-      allComments.forEach(function(comment) {
-        const commentCard = document.createElement("div");
-        commentCard.className = "comment-item";
-
-        commentCard.innerHTML = `
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <h6 class="mb-1">${comment.majorName}</h6>
-              <p class="mb-1">${comment.content}</p>
-              <small class="text-muted">Posted by ${comment.username} on ${comment.date}</small>
-            </div>
-            <a href="${comment.pageUrl}#discussion" class="btn btn-sm custom-btn ms-3">View</a>
-          </div>
-        `;
-
-        myCommentsList.appendChild(commentCard);
+    if (emailForm) {
+      emailForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        alert("Email update backend is not connected yet.");
       });
     }
 
-    loadDemoComments();
+    const passwordForm = document.getElementById("passwordForm");
+
+    if (passwordForm) {
+      passwordForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        alert("Password update backend is not connected yet.");
+      });
+    }
+
+    const myCommentsList = document.getElementById("myCommentsList");
+
+    if (myCommentsList) {
+      myCommentsList.innerHTML = `<p class="text-muted">Comments backend is not connected yet.</p>`;
+    }
   </script>
 </body>
 </html>
