@@ -22,6 +22,7 @@ def allowed_file(filename):
 db.init_app(app)
 migrate.init_app(app, db)
 
+db.init_app(app)
 csrf = CSRFProtect(app)
 
 

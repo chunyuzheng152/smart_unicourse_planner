@@ -388,14 +388,22 @@
                         GET /api/my-comments
                       -->
 
-                      <form id="commentForm" class="mb-4">
-                          <div class="mb-3">
-                              <label for="commentInput" class="form-label">Add a comment</label>
-                              <textarea id="commentInput" class="form-control" rows="3" placeholder="Write your comment here..."></textarea>
-                          </div>
+                        <form id="commentForm" class="mb-4" action="{{ url_for('add_comment') }}" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-                          <button type="submit" class="btn custom-btn">Post Comment</button>
-                      </form>
+                            <div class="mb-3">
+                                <label for="commentInput" class="form-label">Add a comment</label>
+
+                                <textarea 
+                                    id="commentInput" 
+                                    name="content"
+                                    class="form-control" 
+                                    rows="3" 
+                                    placeholder="Write your comment here..."
+                                    required></textarea>
+                            </div>
+                            <button type="submit" class="btn custom-btn">Post Comment</button>
+                        </form>
 
                       <div id="commentList" class="comment-list">
                           <!-- Comments will be inserted by JavaScript -->
@@ -449,38 +457,7 @@
           });
       }
 
-      commentForm.addEventListener("submit", function(event) {
-          event.preventDefault();
-
-          const content = commentInput.value.trim();
-
-          if (!content) {
-              alert("Please write a comment.");
-              return;
-          }
-
-          const username = localStorage.getItem("username") || "User";
-
-          const newComment = {
-              majorName: majorName,
-              pageUrl: majorPageUrl,
-              username: username,
-              content: content,
-              date: new Date().toLocaleDateString()
-          };
-
-          const comments = JSON.parse(localStorage.getItem(commentStorageKey)) || [];
-          comments.unshift(newComment);
-
-          localStorage.setItem(commentStorageKey, JSON.stringify(comments));
-
-          commentInput.value = "";
-          loadComments();
-
-          alert("Comment posted.");
-      });
-
-      loadComments();
+   
   </script>
 </body>
 </html>
