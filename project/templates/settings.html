@@ -102,15 +102,17 @@
           <h2>Email</h2>
           <p class="text-muted">View or change your linked email address.</p>
 
-          <form id="emailForm">
+          <form id="emailForm" method="POST" action="{{url_for('update_email')}}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
             <div class="mb-3">
               <label for="currentEmail" class="form-label">Current Email</label>
-              <input type="email" id="currentEmail" class="form-control" readonly>
+              <input type="email" id="currentEmail" class="form-control" value="{{ user.email }}" readonly>
             </div>
 
             <div class="mb-3">
               <label for="newEmail" class="form-label">New Email</label>
-              <input type="email" id="newEmail" class="form-control" placeholder="Enter new email">
+              <input type="email" id="newEmail" name="new_email" class="form-control" placeholder="Enter new email" required>
             </div>
 
             <button type="submit" class="btn custom-btn">Update Email</button>
@@ -122,20 +124,22 @@
           <h2>Password</h2>
           <p class="text-muted">Change your account password.</p>
 
-          <form id="passwordForm">
+          <form id="passwordForm" method="POST" action="{{url_for('change_password')}}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
             <div class="mb-3">
               <label for="oldPassword" class="form-label">Old Password</label>
-              <input type="password" id="oldPassword" class="form-control" placeholder="Enter old password">
+              <input type="password" id="oldPassword" name="current_password" class="form-control" placeholder="Enter old password" required>
             </div>
 
             <div class="mb-3">
               <label for="newPassword" class="form-label">New Password</label>
-              <input type="password" id="newPassword" class="form-control" placeholder="Enter new password">
+              <input type="password" id="newPassword" name="new_password" class="form-control" placeholder="Enter new password" required>
             </div>
 
             <div class="mb-3">
               <label for="confirmPassword" class="form-label">Confirm New Password</label>
-              <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm new password">
+              <input type="password" id="confirmPassword" name="confirm_password" class="form-control" placeholder="Confirm new password" required>
             </div>
 
             <button type="submit" class="btn custom-btn">Update Password</button>
@@ -196,29 +200,6 @@
       });
     });
 
-    const emailForm = document.getElementById("emailForm");
-    const currentEmailInput = document.getElementById("currentEmail");
-    const newEmailInput = document.getElementById("newEmail");
-
-    if (currentEmailInput) {
-      currentEmailInput.value = "Email update not connected yet";
-    }
-
-    if (emailForm) {
-      emailForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-        alert("Email update backend is not connected yet.");
-      });
-    }
-
-    const passwordForm = document.getElementById("passwordForm");
-
-    if (passwordForm) {
-      passwordForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-        alert("Password update backend is not connected yet.");
-      });
-    }
 
   </script>
 </body>

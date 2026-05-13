@@ -89,6 +89,71 @@ def logout():
     return redirect(url_for("index"))
 
 
+@app.route("/update-email", methods=["POST"])
+def update_email():
+    if "user_id" not in session:
+        flash("Please log in first.")
+        return redirect(url_for("login"))
+    
+    new_email = request.form.get("new_email")
+
+    if not new_email:
+        flash("Please enter a new email.")
+        return redirect(url_for("settings"))
+    
+    user = User.query.get(session["user_id"])
+
+    if user is None:
+        flash("User not found.")
+        return redirect(url_for("login"))
+    
+    existing_user = User.query.filter_by(email=new_email).first()
+
+    if existing_user and existing_user.id != user.id:
+        flash("This email is already used.")
+        return redirect(url_for("settings"))
+    
+    user.email = new_email
+    db.session.commit()
+
+    flash("Email updated successfully.")
+    return redirect(url_for("settings"))
+
+
+@app.route("/change-password", methods=["POST"])
+def change_password():
+    if "user_id" not in session:
+        flash("Please log in first.")
+        return redirect(url_for("login"))
+    
+    current_password = request.form.get("current_password")
+    new_password = request.form.get("new_password")
+    confirm_password = request.form.get("confirm_password")
+
+    if not current_password or not new_password or not confirm_password:
+        flash("Please fill in all password fields.")
+        return redirect(url_for("settings"))
+    
+    if new_password != confirm_password:
+        flash("New passwords do not match.")
+        return redirect(url_for("settings"))
+    
+    user = User.query.get(session["user_id"])
+
+    if user is None:
+        flash("User not found.")
+        return redirect(url_for("login"))
+    
+    if not user.check_password(current_password):
+        flash("Current password is incorrect.")
+        return redirect(url_for("settings"))
+    user.set_password(new_password)
+    db.session.commit()
+
+    flash("Password changed successfully.")
+    return redirect(url_for("settings"))
+
+
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
