@@ -1,4 +1,4 @@
-from flask import Flask, flash, render_template, request, redirect, url_for, session
+from flask import Flask, flash, render_template, request, redirect, url_for, session, jsonify
 from flask_wtf.csrf import CSRFProtect
 
 from project import db, migrate
@@ -377,6 +377,28 @@ def survey():
 
     return render_template("survey.html")
 
+
+@app.route("/api/charts")
+def api_charts():
+    surveys = Survey.query.all()
+
+    popular_major_counts = {}
+    choice_reason_counts = {}
+
+    for survey in surveys:
+        popular_major_counts[survey.q1] = popular_major_counts.get(survey.q1,0) + 1
+        choice_reason_counts[survey.q2] = choice_reason_counts.get(survey.q2,0) + 1
+
+    return jsonify({
+        "popular_majors":{
+            "labels": list(popular_major_counts.keys()),
+            "values": list(popular_major_counts.values())
+        },
+        "choice_reasons":{
+            "labels": list(choice_reason_counts.keys()),
+            "values": list(choice_reason_counts.values())
+        }
+    })
 
 if __name__ == "__main__":
     with app.app_context():
