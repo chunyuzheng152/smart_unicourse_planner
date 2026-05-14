@@ -48,6 +48,9 @@ class Favourite(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     major_id = db.Column(db.Integer, db.ForeignKey("major.id"), nullable=False)
+    __table_args__ = (
+        db.UniqueConstraint("user_id", "major_id", name="unique_user_major_favourite"),
+    )
 
 
 class Survey(db.Model):

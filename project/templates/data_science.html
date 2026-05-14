@@ -18,6 +18,16 @@
                 Data Science focuses on collecting, analysing, and interpreting data. <br>
                 It uses statistics, programming, and machine learning to support decision-making.
             </div>
+            <form action="{{ url_for('toggle_favourite', major_id=major.id) }}" method="POST" class="mt-3">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="btn btn-outline-primary">
+                    {% if major.id in favourite_major_ids %}
+                        Remove Favourite
+                    {% else %}
+                        Add Favourite
+                    {% endif %}
+                </button>
+            </form>
         </div>
     </section>
 
