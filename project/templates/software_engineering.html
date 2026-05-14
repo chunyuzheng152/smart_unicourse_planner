@@ -18,6 +18,15 @@
                 Software Engineering focuses on designing, building, testing, and maintaining software systems. <br>
                 It combines programming skills with project management and software development methods.
             </div>
+            <form action="{{ url_for('toggle_favourite', major_id=major.id) }}" method="POST" class="mt-3">
+                <button type="submit" class="btn btn-sm btn-outline-primary">
+                    {% if major.id in favourite_major_ids %}
+                        Remove Favourite
+                    {% else %}
+                        Add Favourite
+                    {% endif %}
+                </button>
+            </form>
         </div>
     </section>
 

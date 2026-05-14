@@ -19,6 +19,16 @@
         <div class="major-brief-description">
             Computer Science is the study of designing and developing computer systems. <br> It encompasses programming, data structures, algorithms, and computer networks to create effective IT solutions. 
         </div>
+        <form action="{{ url_for('toggle_favourite', major_id=major.id) }}" method="POST" class="mt-3">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn btn-outline-primary">
+                {% if major.id in favourite_major_ids %}
+                    Remove Favourite
+                {% else %}
+                    Add Favourite
+                {% endif %}
+            </button>
+        </form>
     </div>
     </section>
     <!-- Info Navbar -->

@@ -3,7 +3,7 @@ from flask_wtf.csrf import CSRFProtect
 
 from project import db, migrate
 from project.config import Config
-from project.models import User, Survey, Comment, Major
+from project.models import User, Survey, Comment, Major, Favourite
 import os
 from werkzeug.utils import secure_filename
 
@@ -243,25 +243,72 @@ def settings():
     my_comments = Comment.query.filter_by(user_id=user_id).order_by(Comment.created_at.desc()).all()
     return render_template("settings.html", user=user, my_comments=my_comments)  
 
+@app.route("/toggle_favourite/<int:major_id>", methods=["POST"])
+def toggle_favourite(major_id):
+    user_id = session.get("user_id")
+    if not user_id:
+        flash("Please log in first.")
+        return redirect(url_for("login"))
+    favourite = Favourite.query.filter_by(
+        user_id=user_id,
+        major_id=major_id
+    ).first()
+
+    if favourite:
+        db.session.delete(favourite)
+        flash("Removed from favourites.")
+    else:
+        new_favourite = Favourite(
+            user_id=user_id,
+            major_id=major_id
+        )
+        db.session.add(new_favourite)
+        flash("Added to favourites.")
+    db.session.commit()
+    return redirect(request.referrer or url_for("index"))
+    
+
 @app.route("/computer-science")
 def computer_science():
     major = get_or_create_major("computer-science")
     comments = Comment.query.filter_by(major_id=major.id).order_by(Comment.created_at.desc()).all()
-    return render_template("computer_science.html", major=major, comments=comments)
+
+    favourite_major_ids = set()
+    user_id = session.get("user_id")
+
+    if user_id:
+        favourites = Favourite.query.filter_by(user_id=user_id).all()
+        favourite_major_ids = {f.major_id for f in favourites}
+    return render_template("computer_science.html", major=major, comments=comments,favourite_major_ids=favourite_major_ids)
 
 
 @app.route("/data-science")
 def data_science():
     major = get_or_create_major("data-science")
     comments = Comment.query.filter_by(major_id=major.id).order_by(Comment.created_at.desc()).all()
-    return render_template("data_science.html", major=major, comments=comments)
+
+    favourite_major_ids = set()
+    user_id = session.get("user_id")
+
+    if user_id:
+        favourites = Favourite.query.filter_by(user_id=user_id).all()
+        favourite_major_ids = {f.major_id for f in favourites}
+    return render_template("data_science.html", major=major, comments=comments,favourite_major_ids=favourite_major_ids)
 
 
 @app.route("/software-engineering")
 def software_engineering():
     major = get_or_create_major("software-engineering")
     comments = Comment.query.filter_by(major_id=major.id).order_by(Comment.created_at.desc()).all()
-    return render_template("software_engineering.html", major=major, comments=comments)
+
+    favourite_major_ids = set()
+    user_id = session.get("user_id")
+
+    if user_id:
+        favourites = Favourite.query.filter_by(user_id=user_id).all()
+        favourite_major_ids = {f.major_id for f in favourites}
+    return render_template("software_engineering.html", major=major, comments=comments, favourite_major_ids=favourite_major_ids)
+
 
 @app.route("/add-comment", methods=["POST"])
 def add_comment():
