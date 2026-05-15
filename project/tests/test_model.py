@@ -1,52 +1,67 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from models import User, Comment, Survey
+from project.models import User,Major, Comment, Survey, Favourite
 
 
 def test_user_model_fields():
     user = User(
-        displayName="Test User",
-        emailAddress="test@example.com",
-        password=generate_password_hash("Password123")
+        username="testuser",
+        email="test@example.com"
+    )
+    user.set_password("Password123")
+
+    assert user.username == "testuser"
+    assert user.email == "test@example.com"
+    assert user.password_hash != "Password123"
+    assert user.check_password("Password123") is True
+    assert user.check_password("wrongpassword") is False
+
+def test_major_model_fields():
+    major = Major(
+        name="Data Science",
+        description="Test description"
     )
 
-    assert user.displayName == "Test User"
-    assert user.emailAddress == "test@example.com"
-    assert user.password != "Password123"
-
-
-def test_password_hash_check():
-    password = "Password123"
-    password_hash = generate_password_hash(password)
-
-    assert check_password_hash(password_hash, password) is True
-    assert check_password_hash(password_hash, "wrongpassword") is False
+    assert major.name == "Data Science"
+    assert major.description == "Test description"
 
 
 def test_comment_model_fields():
     comment = Comment(
-        major="Data Science",
-        userID=1,
-        comment="This is a test comment."
+        content="This is a test comment.",
+        user_id=1,
+        major_id=1
     )
 
-    assert comment.major == "Data Science"
-    assert comment.userID == 1
-    assert comment.comment == "This is a test comment."
+    assert comment.content == "This is a test comment."
+    assert comment.user_id == 1
+    assert comment.major_id == 1
+
+
 
 
 def test_survey_model_fields():
     survey = Survey(
-        userID=1,
-        q1=1,
-        q2=2,
-        q3=3,
-        q4=4,
-        q5=5,
-        q6=6,
-        q7=7
+        user_id=1,
+        q1="Computer Science",
+        q2="Good job opportunities",
+        q3="Career prospects",
+        q4="Programming and software development",
+        q5="Courses",
+        q6="Maybe",
+        q7="Yes"
     )
 
-    assert survey.userID == 1
-    assert survey.q1 == 1
-    assert survey.q7 == 7
+    assert survey.user_id == 1
+    assert survey.q1 == "Computer Science"
+    assert survey.q7 == "Yes"
+
+
+    def test_favourite_model_fields():
+        favourite = Favourite(
+            user_id=1,
+            major_id=1
+        )
+
+        assert favourite.user_id == 1
+        assert favourite.major_id == 1

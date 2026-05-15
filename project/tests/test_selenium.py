@@ -51,6 +51,7 @@ def test_signup_empty_form_is_blocked(browser, live_server):
 def test_signup_password_mismatch_shows_error(browser, live_server):
     browser.get(live_server + "/signup")
 
+    browser.find_element(By.ID, "username").send_keys("testuser")
     browser.find_element(By.ID, "email").send_keys("test@example.com")
     browser.find_element(By.ID, "psw").send_keys("Password123")
     browser.find_element(By.ID, "psw-repeat").send_keys("Different123")
@@ -58,12 +59,12 @@ def test_signup_password_mismatch_shows_error(browser, live_server):
     submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
     submit_button.click()
 
-    error_message = WebDriverWait(browser, 5).until(
-        EC.visibility_of_element_located((By.ID, "passwordError"))
+    WebDriverWait(browser, 5).until(
+        EC.text_to_be_present_in_element(
+            (By.ID, "passwordError"),
+            "Passwords do not match."
+        )
     )
-
-    assert "match" in error_message.text.lower()
-
 
 def test_survey_start_button_shows_first_question(browser, live_server):
     browser.get(live_server + "/survey")
